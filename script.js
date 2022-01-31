@@ -1,10 +1,32 @@
 
-let title = 'lesson02';
-let screens = 'Простые, Сложные, Интерактивные';
-let screenPrice = 500;
+let title = prompt('Как называется Ваш проект?');
+let screens = prompt('Какие типы экранов нужно разработать?', 'Простые, Сложные, Интерактивные');
+let adaptive = confirm('Нужен ли адаптив на сайте?');
+let screenPrice = +prompt('Сколько будет стоить данная работа?');
+let service1 = prompt('Какой дополнительный тип услуги нужен?');
+let servicePrice1 = +prompt('Сколько это будет стоить?');
+let service2 = prompt('Какой дополнительный тип услуги нужен?');
+let servicePrice2 = +prompt('Сколько это будет стоить?');
 let rollback = 38;
-let fullPrice = 1000;
-let adaptive = true;
+let fullPrice = screenPrice + servicePrice1 + servicePrice2;
+let servicePercentPrice = fullPrice - (fullPrice * (rollback / 100));
+
+servicePercentPrice = Math.round(servicePercentPrice);
+
+console.log(servicePercentPrice);
+
+
+
+if (fullPrice >= 30000) {
+	console.log('Даем скидку 10%');
+} else if (fullPrice >= 15000 && fullPrice < 30000) {
+	console.log('Даем скидку 5%');
+} else if (fullPrice >= 0 && fullPrice < 15000) {
+	console.log('Скидка не предуссмотрена');
+} else {
+	console.log('Что-то пошло не так');
+}
+
 
 alert('Первый урок!');
 console.log('Привет консоль!');
