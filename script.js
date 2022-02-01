@@ -9,9 +9,7 @@ let service2 = prompt('Какой дополнительный тип услуг
 let servicePrice2 = +prompt('Сколько это будет стоить?');
 let rollback = 38;
 let fullPrice = screenPrice + servicePrice1 + servicePrice2;
-let servicePercentPrice = fullPrice - (fullPrice * (rollback / 100));
-
-servicePercentPrice = Math.round(servicePercentPrice);
+let servicePercentPrice = Math.round(fullPrice - (fullPrice * (rollback / 100)));
 
 console.log(servicePercentPrice);
 
