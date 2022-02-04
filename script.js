@@ -12,7 +12,7 @@ let fullPrice = screenPrice + servicePrice1 + servicePrice2;
 let servicePercentPrice = Math.round(fullPrice - (fullPrice * (rollback / 100)));
 
 console.log(servicePercentPrice);
-
+let con
 
 
 if (fullPrice >= 30000) {
