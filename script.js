@@ -14,9 +14,6 @@ let allServicePrices;
 let fullPrice;
 let servicePercentPrice = Math.round(fullPrice - (fullPrice * (rollback / 100)));
 
-
-
-
 const getAllServicePrices = function (s1, s2) {
 	return (s1 + s2);
 };
