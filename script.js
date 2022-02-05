@@ -23,28 +23,19 @@ const getAllServicePrices = function () {
 	return (servicePrice1 + servicePrice2);
 };
 
-allServicePrices = getAllServicePrices();
-
 function getFullPrice () {
 	return (allServicePrices + screenPrice);
 }
-
-fullPrice = getFullPrice();
 
 
 const getTitle = function (title) {
 	return (title[0].toUpperCase() + title.slice(1).toLowerCase());
 };
 
-title = getTitle(title.trim());
-
 
 const getServicePercentPrices = function (fullPrice, rollback) {
 	return (Math.round(fullPrice - (fullPrice * (rollback / 100))));
 };
-
-servicePercentPrice = getServicePercentPrices(fullPrice, rollback);
-
 
 
 const getRollBackMassage = function (price) {
