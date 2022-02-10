@@ -1,72 +1,83 @@
 
-	const isNumder = function (num) {
-		return !isNaN(parseFloat(num)) && isFinite(num) && num != ' ';
-	};
-
 const appData = {
-	
 	title: ' ',
-	screens: ' ',
-	adaptive: true,
+	screens: [],
 	screenPrice: 0,
+	adaptive: true,
 	rollback: 10,
-
-	service1: ' ',
-	service2: ' ',
-	servicePrice: 0,
 	allServicePrices: 0,
 	fullPrice: 0,
 	servicePercentPrice: 0,
-
-	
+	services: {},
+	start: function () {
+		appData.asking();
+		appData.addPrices();
+		appData.getFullPrice();
+		appData.getServicePercentPrices();
+		appData.getTitle();
+		appData.getRollBackMassage();
+		appData.logger();	
+	},
+	isNumder: function (num) {
+		return !isNaN(parseFloat(num)) && isFinite(num) && num != ' ';
+	},
+	isStr: function (str) {
+		return isNaN(str) && str != '' && str.trim();
+	},
 	asking: function () {
-		appData.title = prompt('Как называется Ваш проект?', 'КалькУлятоР Верстки');
-		appData.screens = prompt('Какие типы экранов нужно разработать?', 'Простые, Сложные, Интерактивные');
-		appData.adaptive = confirm('Нужен ли адаптив на сайте?');
-	
 		do {
-			appData.screenPrice = +prompt('Сколько будет стоить данная работа?');
-		} 
-	
-		while (!isNumder(appData.screenPrice)); 
-	
-	},
+			appData.title = prompt('Как называется Ваш проект?', 'КалькУлятоР Верстки');
+		}  while (!appData.isStr(appData.title));
+		appData.adaptive = confirm('Нужен ли адаптив на сайте?');
 
-	getAllServicePrices: function () {
-		let sum = 0;
-	
-		 for (let i = 0; i < 2; i++) {
-	
-			if(i === 0) {
-				appData.service1 = prompt('Какой дополнительный тип услуги нужен?');
-			} else  if(i === 1) {
-				appData.service2 = prompt('Какой дополнительный тип услуги нужен?');
-			}
-	
+		for (let i = 0; i < 2; i++) {
+			let price = 0;
+			let name;
 			do {
-				appData.servicePrice = +prompt('Сколько это будет стоить?');
-			}
-	
-			while (!isNumder(appData.servicePrice));
-			sum += appData.servicePrice;
+				 name = prompt('Какие типы экранов нужно разработать?');
+			} while (!appData.isStr(name));
 			
+			do {
+				price = prompt('Сколько будет стоить данная работа?');
+			} while (!appData.isNumder(price));
+
+			appData.screens.push({ id: i, name: name, price: price });
 		}
-	
-		 return sum;
+
+		for (let i = 0; i < 2; i++) {
+			let price = 0;
+			let name;
+			do {
+				name = prompt('Какой дополнительный тип услуги нужен?');
+			}	while (!appData.isStr(name));
+
+
+			do {
+				price = prompt('Сколько это будет стоить?');
+			} while (!appData.isNumder(price));
+
+			appData.services[name + ' ' + i] = +price; // что бы не переписывались значения в объекте, добавили уникальные индификаторы равные индексу итеррации
+
+		}
 	},
-	
+	addPrices: function () {
+		for (let screen of appData.screens) {
+			appData.screenPrice += +screen.price;
+		}
+
+		for (let key in appData.services) {
+			appData.allServicePrices += appData.services[key];
+		}
+	},
 	getFullPrice: function  () {
-		return (appData.allServicePrices + appData.screenPrice);
+		appData.fullPrice = +appData.screenPrice + appData.allServicePrices;
 	},
-
-	getTitle: function () {
-		return (appData.title.trim()[0].toUpperCase() + appData.title.slice(1).toLowerCase());
-	},
-
 	getServicePercentPrices: function () {
-		return (Math.round(appData.fullPrice - (appData.fullPrice * (appData.rollback / 100))));
+		appData.servicePercentPrice = Math.round(appData.fullPrice - (appData.fullPrice * (appData.rollback / 100)));
 	},
-
+	getTitle: function () {
+		appData.title = (appData.title.trim()[0].toUpperCase() + appData.title.slice(1).toLowerCase());
+	},
 	getRollBackMassage: function (price) {
 		if (price >= 30000) {
 			return 'Даем скидку 10%';
@@ -78,27 +89,12 @@ const appData = {
 			return 'Что-то пошло не так';
 		}
 	},
-
-
-	start: function () {
-		appData.asking();
-		appData.allServicePrices = appData.getAllServicePrices();
-		appData.fullPrice = appData.getFullPrice();
-		appData.getTitle();
-		appData.servicePercentPrice = appData.getServicePercentPrices();
-		appData.getRollBackMassage();
-		appData.logger();
-		
-	},
-
 	logger: function () {
-		for (let key in appData) {
-			console.log(key + ': ' + appData[key]);
-		}
-
-		console.log(appData.screenPrice);
+		console.log(appData.fullPrice);
+		console.log(appData.servicePercentPrice);
+		console.log(appData.screens);
+		console.log(appData.services);
 	}
-
 };
 
 appData.start();
