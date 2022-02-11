@@ -1,3 +1,25 @@
+'use strict';
+
+const title = document.getElementByTagName('h1');
+const handlerBtn = document.getElementsByClassName('.handler_btn');
+const screenBtn = document.querySelector('.screen-btn');
+const otherItemsPercent = document.querySelectorAll('.other-items.percen');
+const otherItemsNumber = document.querySelectorAll('.other-items.number');
+const range = document.querySelector('.rollback input');
+const spanRangeValue = document.querySelector('.rollback span');
+const totalImput = document.getElementsByClassName('total-input');
+const totalImputPriceScreen = totalImput[0];
+const totalImputTotalCount = totalImput[1];
+const totalImputTotalCountOther = totalImput[2];
+const totalImputTotalFullCount = totalImput[3];
+const totalImputTotalCountRollback = totalImput[4];
+
+let screens = document.querySelectorAll('.screen');
+
+
+
+
+
 
 const appData = {
 	title: ' ',
