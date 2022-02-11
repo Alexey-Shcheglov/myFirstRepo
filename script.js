@@ -49,7 +49,7 @@ const appData = {
 			let name;
 			do {
 				name = prompt('Какой дополнительный тип услуги нужен?');
-			}	while (!appData.isStr(name));
+			}	while (!appData.isStr(name) || appData.isNumder(name));
 
 
 			do {
