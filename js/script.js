@@ -16,11 +16,6 @@ const totalImputTotalCountRollback = totalImput[4];
 
 let screens = document.querySelectorAll('.screen');
 
-
-
-
-
-
 const appData = {
 	title: ' ',
 	screens: [],
