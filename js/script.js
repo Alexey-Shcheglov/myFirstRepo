@@ -253,15 +253,8 @@ const appData = {
 		return !isNaN(parseFloat(value)) && isFinite(value);
 	},
 	logger: function () {
-		const methods = [];
-
-		for (let key in this) {
-			if (typeof this[key] === 'function') {
-				methods.push(key);
-			} else {
-				console.log(key + ': ', this[key]);
-			}
-		}
+		
+		// console.log('fullprise' + ' : ' + this.fullPrice);
 	},
 };
 
